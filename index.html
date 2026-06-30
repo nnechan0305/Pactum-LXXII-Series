@@ -2,10 +2,136 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>캐릭터 소개 사이트</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pactum LXXII Series</title>
+    <style>
+        /* 웹사이트 전체 기본 스타일 설정 (다크모드 분위기) */
+        body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            font-family: 'Malgun Gothic', sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #58a6ff;
+            text-align: center;
+            margin-top: 30px;
+            font-size: 2rem;
+            text-shadow: 0 0 10px rgba(88, 166, 255, 0.3);
+        }
+
+        .subtitle {
+            color: #8b949e;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* 캐릭터 프로필 카드가 들어가는 상자 */
+        .profile-container {
+            width: 100%;
+            max-width: 500px;
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            box-sizing: border-box;
+        }
+
+        /* 이미지 자리를 표시하는 가상 상자 (나중에 진짜 이미지 주소로 교체 가능) */
+        .character-img-slot {
+            width: 100%;
+            height: 300px;
+            background-color: #21262d;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #8b949e;
+            font-weight: bold;
+            margin-bottom: 20px;
+            border: 2px dashed #30363d;
+        }
+
+        .character-name {
+            font-size: 1.5rem;
+            color: #ffffff;
+            margin: 0 0 15px 0;
+            border-bottom: 2px solid #58a6ff;
+            padding-bottom: 5px;
+        }
+
+        /* 프로필 상세 정보 테이블 */
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .info-table td {
+            padding: 8px 5px;
+            border-bottom: 1px solid #21262d;
+            font-size: 0.95rem;
+        }
+
+        .info-label {
+            color: #58a6ff;
+            font-weight: bold;
+            width: 30%;
+        }
+
+        /* 세계관 스토리 및 소개 문구 */
+        .character-story {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #e6edf3;
+            background-color: #0d1117;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #58a6ff;
+        }
+    </style>
 </head>
-<body style="background-color: #1a1a1a; color: white; text-align: center; padding-top: 50px;">
-    <h1>✨ 캐릭터 소개 페이지 ✨</h1>
-    <p>여기에 내 소중한 캐릭터들의 프로필과 세계관이 들어갈 예정입니다!</p>
+<body>
+
+    <h1>Pactum LXXII Series</h1>
+    <p class="subtitle">소중한 캐릭터들의 기록 보관소</p>
+
+    <!-- 캐릭터 프로필 카드 시작 -->
+    <div class="profile-container">
+        <!-- 이미지 넣는 곳: 나중에 이미지를 깃허브에 업로드하고 주소를 src에 넣으면 됩니다 -->
+        <div class="character-img-slot">
+            [ 캐릭터 일러스트 영역 ]
+        </div>
+
+        <h2 class="character-name">캐릭터 이름</h2>
+        
+        <table class="info-table">
+            <tr>
+                <td class="info-label">소속</td>
+                <td>여기에 소속 조직이나 진영 입력</td>
+            </tr>
+            <tr>
+                <td class="info-label">나이 / 성별</td>
+                <td>??세 / ?성</td>
+            </tr>
+            <tr>
+                <td class="info-label">주요 능력</td>
+                <td>캐릭터의 특기나 고유 이능력 등</td>
+            </tr>
+        </table>
+
+        <div class="character-story">
+            <strong>[ 캐릭터 상세 소개 및 스토리 ]</strong><br>
+            여기에 캐릭터의 배경 서사, 성격, 혹은 핵심 대사를 자유롭게 작성해 보세요. 줄바꿈을 하고 싶을 때는 문장 끝에 &lt;br&gt; 태그를 붙여주면 됩니다.
+        </div>
+    </div>
+    <!-- 캐릭터 프로필 카드 끝 -->
+
 </body>
 </html>
