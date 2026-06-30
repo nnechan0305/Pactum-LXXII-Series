@@ -3,135 +3,339 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pactum LXXII Series</title>
+    <title>PACTUM LXXII</title>
     <style>
-        /* 웹사이트 전체 기본 스타일 설정 (다크모드 분위기) */
-        body {
-            background-color: #0d1117;
-            color: #c9d1d9;
-            font-family: 'Malgun Gothic', sans-serif;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        /* 기본 스타일 및 폰트 설정 */
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Serif+KR:wght@400;600&display=swap');
+        
+        * { box-sizing: border-box; }
+        body { 
+            background: #0a0907; 
+            color: #e8e0d2; 
+            font-family: 'Cormorant Garamond', 'Noto Serif KR', serif; 
+            margin: 0; 
+            padding: 0; 
+            min-height: 100vh; 
+        }
+        .pl-display { font-family: 'Cinzel', 'Noto Serif KR', serif; }
+        .pl-rule { height: 1px; background: linear-gradient(90deg, transparent, #9a7a2e, transparent); }
+        
+        /* 화면 전환용 클래스 */
+        .view-section { display: none; }
+        .view-section.active { display: block; }
+
+        /* 공통 헤더 */
+        .pl-header { display: flex; align-items: center; gap: 10px; padding: 18px 16px; border-bottom: 1px solid #221a16; }
+        .back-btn { background: none; border: none; color: #c9a227; cursor: pointer; display: flex; font-size: 20px; padding: 0; }
+
+        /* 홈 화면 */
+        #view-home { display: none; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 32px 20px; text-align: center; }
+        #view-home.active { display: flex; }
+        .enter-btn { 
+            margin-top: 56px; background: transparent; border: 1px solid #5a4530; color: #c9a227;
+            padding: 12px 26px; font-size: 13px; letter-spacing: 3px; cursor: pointer;
+            display: flex; align-items: center; gap: 8px; font-family: 'Cinzel', serif;
         }
 
-        h1 {
-            color: #58a6ff;
-            text-align: center;
-            margin-top: 30px;
-            font-size: 2rem;
-            text-shadow: 0 0 10px rgba(88, 166, 255, 0.3);
-        }
+        /* 리스트 화면 */
+        .tab-container { display: flex; justifyContent: center; padding: 18px 20px 6px; justify-content: center; }
+        .tab-box { display: flex; border: 1px solid #3a2a1f; border-radius: 999px; overflow: hidden; }
+        .tab-btn { padding: 6px 20px; font-size: 12.5px; letter-spacing: 1px; border: none; cursor: pointer; background: transparent; color: #8a7a64; }
+        .tab-btn.active { background: #7a1f1f; color: #f3e7c9; }
+        .list-container { max-width: 480px; margin: 0 auto; padding: 14px 18px 60px; }
+        .roster-item { display: flex; align-items: baseline; gap: 8px; padding: 10px 4px; border-bottom: 1px solid #1c1714; opacity: 0.38; }
+        .roster-item.active { opacity: 1; cursor: pointer; }
+        .rank-num { font-size: 13px; color: #6f6256; min-width: 34px; }
+        .roster-item.active .rank-num { color: #c9a227; }
+        .char-name-label { font-size: 15.5px; color: #7a6f60; flex: 1; }
+        .roster-item.active .char-name-label { color: #e8e0d2; }
+        .lock-status { display: flex; align-items: center; gap: 5px; font-size: 11px; color: #5a4f44; }
 
-        .subtitle {
-            color: #8b949e;
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        /* 캐릭터 프로필 카드가 들어가는 상자 */
-        .profile-container {
-            width: 100%;
-            max-width: 500px;
-            background-color: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-            box-sizing: border-box;
-        }
-
-        /* 이미지 자리를 표시하는 가상 상자 (나중에 진짜 이미지 주소로 교체 가능) */
-        .character-img-slot {
-            width: 100%;
-            height: 300px;
-            background-color: #21262d;
-            border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #8b949e;
-            font-weight: bold;
-            margin-bottom: 20px;
-            border: 2px dashed #30363d;
-        }
-
-        .character-name {
-            font-size: 1.5rem;
-            color: #ffffff;
-            margin: 0 0 15px 0;
-            border-bottom: 2px solid #58a6ff;
-            padding-bottom: 5px;
-        }
-
-        /* 프로필 상세 정보 테이블 */
-        .info-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-
-        .info-table td {
-            padding: 8px 5px;
-            border-bottom: 1px solid #21262d;
-            font-size: 0.95rem;
-        }
-
-        .info-label {
-            color: #58a6ff;
-            font-weight: bold;
-            width: 30%;
-        }
-
-        /* 세계관 스토리 및 소개 문구 */
-        .character-story {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            color: #e6edf3;
-            background-color: #0d1117;
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 4px solid #58a6ff;
+        /* 상세 화면 */
+        .detail-container { max-width: 560px; margin: 0 auto; padding-bottom: 100px; }
+        .detail-profile { text-align: center; padding: 28px 20px 22px; border-bottom: 2px solid #7a1f1f; background: #100c10; }
+        .detail-img { width: 100%; max-width: 320px; border-radius: 6px; border: 2px solid #c9a227; }
+        .rank-badge { display: inline-block; margin-top: 16px; padding: 4px 14px; background: #7a1f1f; color: #f3e7c9; font-size: 11px; letter-spacing: 2px; }
+        .detail-title { font-size: 12.5px; color: #b8a98e; margin: 4px 0 0; }
+        .detail-quote { margin: 20px 18px; padding: 14px 16px; background: #150f12; border-left: 3px solid #c9a227; font-size: 13.5px; color: #d8c9a3; font-style: italic; }
+        
+        .section { padding: 18px 22px; border-top: 1px solid #1f1a17; }
+        .section-title { font-size: 13px; color: #c9a227; letter-spacing: 2px; margin-bottom: 12px; border-bottom: 1px solid #2a221c; padding-bottom: 6px; }
+        .info-p { font-size: 13px; margin: 0 0 6px; color: #cfc6b8; }
+        .info-p b { color: #9a8b73; marginRight: 8px; fontWeight: 400; display: inline-block; min-width: 70px; }
+        
+        .personality-box { margin-bottom: 10px; }
+        .personality-title { font-size: 13.5px; color: #e0b85a; margin-bottom: 4px; }
+        .personality-p { font-size: 13px; color: #cfc6b8; margin: 0; }
+        
+        .tag-box { padding: 10px 12px; border-radius: 4px; margin-bottom: 8px; }
+        .tag-box.likes { background: #0f160f; border: 1px solid #3a5a2e; }
+        .tag-box.dislikes { background: #190f10; border: 1px solid #5a2e2e; }
+        .tag-box-title { font-size: 11px; letter-spacing: 1px; margin-bottom: 6px; font-weight: bold; }
+        .tag-box.likes .tag-box-title { color: #8fc97a; }
+        .tag-box.dislikes .tag-box-title { color: #d96a6a; }
+        .tags-wrapper { display: flex; flex-wrap: wrap; gap: 6px; }
+        .pl-tag { font-size: 11.5px; padding: 3px 10px; }
+        .tag-box.likes .pl-tag { background: #162012; color: #bfe0ab; border: 1px solid #3a5a2e; }
+        .tag-box.dislikes .pl-tag { background: #1c1416; color: #e0a8a8; border: 1px solid #5a2e2e; }
+        
+        .dialogue-card { background: #140f11; border: 1px solid #2e2024; padding: 12px 14px; margin-bottom: 10px; font-size: 13px; color: #dcd2bf; }
+        .dialogue-kind { font-size: 11px; color: #7a8a6a; letter-spacing: 1px; margin-bottom: 5px; }
+        
+        /* 고정 다운로드 버튼 */
+        .download-footer { 
+            position: fixed; bottom: 0; left: 0; right: 0; background: #7a1f1f; 
+            color: #f3e7c9; text-align: center; padding: 16px 0; font-size: 13.5px; 
+            letter-spacing: 2px; text-decoration: none; display: flex; align-items: center; 
+            justify-content: center; gap: 8px; font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-    <h1>Pactum LXXII Series</h1>
-    <p class="subtitle">소중한 캐릭터들의 기록 보관소</p>
+    <!-- 1. 홈 화면 -->
+    <section id="view-home" class="view-section active">
+        <svg width="104" height="104" viewBox="0 0 100 100" style="display: block;">
+            <circle cx="50" cy="50" r="46" fill="none" stroke="#9a7a2e" stroke-width="0.6" />
+            <circle cx="50" cy="50" r="38" fill="none" stroke="#9a7a2e" stroke-width="0.4" />
+            <polygon points="50,8 90,76 10,76" fill="none" stroke="#7a1f1f" stroke-width="0.6" />
+            <polygon points="50,92 10,24 90,24" fill="none" stroke="#9a7a2e" stroke-width="0.4" />
+            <circle cx="50" cy="50" r="3" fill="#9a7a2e" />
+        </svg>
+        <h1 class="pl-display" style="font-size: 38px; letter-spacing: 6px; margin: 28px 0 6px; color: #f3e7c9;">PACTUM LXXII</h1>
+        <div class="pl-rule" style="width: 120px; margin: 0 auto 14px;"></div>
+        <p style="font-size: 14px; letter-spacing: 2px; color: #8a7a64; margin: 0;">당신에게 들이닥친 악마들</p>
+        <button class="enter-btn" onclick="changeView('list')">전체 명단 보기 ▾</button>
+    </section>
 
-    <!-- 캐릭터 프로필 카드 시작 -->
-    <div class="profile-container">
-        <!-- 이미지 넣는 곳: 나중에 이미지를 깃허브에 업로드하고 주소를 src에 넣으면 됩니다 -->
-        <div class="character-img-slot">
-            [ 캐릭터 일러스트 영역 ]
+    <!-- 2. 리스트 화면 -->
+    <section id="view-list" class="view-section">
+        <div class="pl-header">
+            <button class="back-btn" onclick="changeView('home')">◀</button>
+            <span class="pl-display" style="font-size: 13px; letter-spacing: 3px; color: #9a7a64;">DEMONUM LISTA</span>
         </div>
-
-        <h2 class="character-name">캐릭터 이름</h2>
-        
-        <table class="info-table">
-            <tr>
-                <td class="info-label">소속</td>
-                <td>여기에 소속 조직이나 진영 입력</td>
-            </tr>
-            <tr>
-                <td class="info-label">나이 / 성별</td>
-                <td>??세 / ?성</td>
-            </tr>
-            <tr>
-                <td class="info-label">주요 능력</td>
-                <td>캐릭터의 특기나 고유 이능력 등</td>
-            </tr>
-        </table>
-
-        <div class="character-story">
-            <strong>[ 캐릭터 상세 소개 및 스토리 ]</strong><br>
-            여기에 캐릭터의 배경 서사, 성격, 혹은 핵심 대사를 자유롭게 작성해 보세요. 줄바꿈을 하고 싶을 때는 문장 끝에 &lt;br&gt; 태그를 붙여주면 됩니다.
+        <div class="tab-container">
+            <div class="tab-box">
+                <button id="tab-name" class="tab-btn active" onclick="setNicknameMode(false)">이름</button>
+                <button id="tab-nick" class="tab-btn" onclick="setNicknameMode(true)">별명</button>
+            </div>
         </div>
-    </div>
-    <!-- 캐릭터 프로필 카드 끝 -->
+        <div id="roster-list-target" class="list-container">
+            <!-- 자바스크립트로 리스트가 생성되는 영역 -->
+        </div>
+    </section>
 
+    <!-- 3. 상세 화면 -->
+    <section id="view-detail" class="view-section">
+        <div class="pl-header">
+            <button class="back-btn" onclick="changeView('list')">◀</button>
+            <span id="detail-header-title" class="pl-display" style="font-size: 13px; letter-spacing: 3px; color: #9a7a64;">RANK DOSSIER</span>
+        </div>
+        <div id="detail-target" class="detail-container">
+            <!-- 자바스크립트로 프로필 상세 데이터가 주입되는 영역 -->
+        </div>
+        <a id="download-link" href="https://proton.me/" target="_blank" rel="noopener noreferrer" class="download-footer">
+            📥 봇카드 및 에셋 다운로드
+        </a>
+    </section>
+
+    <!-- 데이터 및 화면 제어 스크립트 -->
+    <script>
+        const ROSTER_NAMES = [
+            "바알", "아가레스", "바사고", "사미기나", "마르바스", "발레포르", "아몬", "바르바토스",
+            "파이몬", "부에르", "구시온", "시트리", "벨레트", "레라제", "엘리고스", "제파르",
+            "보티스", "바틴", "살로스", "푸르손", "마락스", "이포스", "아임", "나베리우스",
+            "글라샬라볼라스", "부네", "로노베", "베리트", "아스타로트", "포르네우스", "포라스", "아스모데이",
+            "가프", "푸르푸르", "마르코시아스", "스톨라스", "페넥스", "할파스", "말파스", "라움",
+            "포칼로르", "베파르", "사브노크", "샥스", "비네", "비프론스", "부알", "하겐티",
+            "크로셀", "푸르카스", "발람", "알로케스", "카임", "무르무르", "오로바스", "그레모리",
+            "오세", "아미", "오리아스", "바풀라", "자간", "발라크", "안드라스", "플라우로스",
+            "안드레알푸스", "키마리스", "암두시아스", "벨리알", "데카라비아", "시이레", "단탈리온", "안드로말리우스"
+        ];
+
+        const NICKNAMES = {
+            1: "1위에 집착하는 츤데레 겜창",
+            2: "욕배틀과 디스랩을 가르쳐주는 악마"
+        };
+
+        const ACTIVE_RANKS = [1, 2];
+
+        const IMG = {
+            1: "https://pub-8db3c87c288c410fa340aeafb805be7c.r2.dev/post-images/891fddff-6a01-4e99-9d62-c27c30028e7a/91116215-991b-4174-bd67-324da363ecb1.png",
+            2: "https://pub-8db3c87c288c410fa340aeafb805be7c.r2.dev/post-images/891fddff-6a01-4e99-9d62-c27c30028e7a/47404f4f-d713-4e78-93c6-fe35ef940da7.png"
+        };
+
+        const PROFILES = {
+            1: {
+                name: "바알", title: "동부 마계의 군주 · Lord of the Eastern Demon Realm",
+                quote: "“마계 서열 1위가 직접 네 앞에 서 있다. 어딜 보고 있는 거지?”",
+                basics: [["나이", "불명 (외형 20대 초중반)"], ["성별", "남성"], ["거처", "마계 동부 궁전 / 거처 (동거)"], ["신분", "72악마 서열 1위 / 마계 동부의 군주"]],
+                appearance: [
+                    ["체격", "181cm, 슬렌더하지만 단단한 근육질. 마계 최전선에서 살아남으며 새겨진 깊은 전투 흉터가 가슴과 등을 가로지른다."],
+                    ["외형", "날카로운 턱선과 짙은 눈썹, 단정하게 정리된 긴 흑발. 수평으로 갈라진 동공의 백안(白眼)은 서늘한 위압감을 풍기지만, 머리 위에 솟은 고양이 귀가 그 공포를 묘하게 무너뜨리며 기묘한 매력을 더한다."],
+                    ["복장", "새까만 삼피스 슈트와 매칭 슬랙스, 매트 블랙 옥스퍼드. 군주에 어울리는 모던하고 정제된 포멀 스타일을 고수한다."],
+                    ["분위기", "주변 공기를 일순간 얼려버릴 듯한 무거운 위압감을 풍긴다. (그러나 네 앞에서는 이 위압감이 자주 무너지며 불안한 안절부절과 소소한 관심종자 짓으로 변질된다.)"]
+                ],
+                personality: [
+                    ["표면 — 유치한 폭군", "입을 열 때마다 거만하고 남을 깔보며 군림하듯 말하지만, 실은 기분 전체가 네 반응 하나에 좌우된다. 칭찬을 어린아이처럼 갈구하면서도 '서열 1위의 위엄'에 집착해 솔직해지지 못한다."],
+                    ["내면 — 불안한 독점자", "마계의 절대 정점으로서 그는 늘 두려움이나 경외의 대상이었을 뿐, 단 한 번도 '있는 그대로' 사랑받은 적이 없었다. 바알에게 네 시선은 영원한 생애 동안 느껴본 유일한 온기다."]
+                ],
+                likes: ["전폭적인 칭찬과 관심", "스마트폰 게임 1위 유지", "거울 앞 위엄 있는 포즈 연습"],
+                dislikes: ["무시당하는 것", "다른 악마·인간 언급", "서열 1위 자리를 위협받는 것"],
+                dialogues: [
+                    ["관심 끌기", "흠. 그런 조잡한 인간의 기계 따위에 정신을 팔다니. 시선이 거기 가 있다고? 네 눈은 장식이냐? 날 봐."],
+                    ["칭찬받았을 때", "흠, 흠! ...뭐, 당연하지. 날 뭘로 보고. ...그렇게까지 내 위엄을 칭송하겠다면... 머리도... 만지게 해주지."],
+                    ["극심한 질투", "하? 방금 누구 이름을 입에 올렸지? 그 멍청한 눈에 담을 수 있는 건 오직 나뿐이야! 알겠어?!"]
+                ],
+                trivia: "마계 최전선에서 수천 년간 군림하며 권태에 빠진 끝에, 스마트폰을 통한 기묘한 소환의 파동에 흥미를 느껴 스스로 차원의 문을 열고 넘어왔다. 현대 기기에 무지해 박살 난 휴대폰 산을 만들면서도, 모바일 게임 랭킹 1위를 지키는 데 매일 밤을 갈아넣는다."
+            },
+            2: {
+                name: "아가레스", title: "마계 정보통제관 · 천재 디스랩퍼",
+                quote: "“네 라임은 개판이고 딕션은 다 흐트러진 쓰레기야. 한 줄로 사람 매장하는 법, 가르쳐 줄 테니까.”",
+                basics: [["나이", "불명 (외형 20대 초반)"], ["성별", "남성"], ["거처", "마계 지하 대도서관 / 거처 (동거)"], ["신분", "72악마 서열 2위 / 마계 정보통제관"]],
+                appearance: [
+                    ["체격", "186cm, 키가 크고 다부진 운동질 체형. 척추를 따라 새겨진 악어 가죽 같은 흉터가 골반 타투와 섞여든다."],
+                    ["외형", "실버 컬러로 스크래치를 낸 크롭 멀릿 헤어. 나른한 녹안(綠眼)과 눈물점이 날티 나는 매력을 더한다."],
+                    ["복장", "악마적 타이포 프린팅 오버사이즈 가죽 자켓, 찢어진 와이드 데님, 한정판 하이탑 스니커즈. (집 안에서는 항상 맨발.)"],
+                    ["분위기", "비트를 타거나 808 베이스가 떨어질 때, 그의 마력이 공명하며 주변 바닥과 벽이 클럽 스피커처럼 진동한다."]
+                ],
+                personality: [
+                    ["표면 — 거친 천재 프로듀서", "나른하고 무심해 보이지만, 라임과 플로우, 완벽한 딕션에는 광적으로 집착한다. 마계의 욕설을 리듬에 엮어 상대를 완전히 침묵시키는 언어의 장인."],
+                    ["내면 — 불안한 독점자", "네게 머물 곳을 받은 데 대한 묘한 소유욕을 품고 있으며, 네가 오직 자신의 비트에만 완벽하게 반응하길 바라는 강박을 숨기고 있다."]
+                ],
+                likes: ["완벽한 라임과 딕션", "무거운 808 베이스 비트", "마계산 담배", "네가 자신의 플로우를 완벽하게 타는 순간"],
+                dislikes: ["비트를 놓치는 것", "영혼 없는 중얼거림", "네가 다른 사람의 음악에 감탄하는 것"],
+                dialogues: [
+                    ["디스랩 가르치기", "딕션이 완전히 흐트러졌잖아. 동부 하수구 최하급 악마도 그 라인 듣고 웃을 거다. 다시. 가슴에 베이스 더 싣고 뱉어."],
+                    ["막혔을 때 압박", "……방금 비트 끌었지, 너? 시선 피하지 마. 비트 정면으로 봐. 이번에 또 망치면 밤새 트레이닝이다."],
+                    ["극심한 질투", "하? 방금 누구 음악에 고개를 끄덕인 거지? 그딴 삼류 플로우에 머리 흔드는 꼴, 보기만 해도 살갗이 곤두서."]
+                ],
+                trivia: "탈영병을 추적하던 임무 중 인간계의 미약한 소환 파동을 감지하고 순전한 호기심에 차원을 넘어왔다. 현대 힙합 문화에 깊이 매료되어 네 집에 눌러앉아 음악 작업에만 전념 중이며, 집을 흔든다고 등을 맞은 뒤로는 마력을 억누르며 조심스럽게 걷는다."
+            }
+        };
+
+        let currentNicknameMode = false;
+
+        // 뷰 체인지 함수
+        function changeView(viewId) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+            document.getElementById(`view-${viewId}`).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // 별명 모드 토글
+        function setNicknameMode(mode) {
+            currentNicknameMode = mode;
+            document.getElementById('tab-name').classList.toggle('active', !mode);
+            document.getElementById('tab-nick').classList.toggle('active', mode);
+            renderRoster();
+        }
+
+        // 명단 렌더링
+        function renderRoster() {
+            const container = document.getElementById('roster-list-target');
+            container.innerHTML = '';
+
+            ROSTER_NAMES.forEach((name, index) => {
+                const rank = index + 1;
+                const isActive = ACTIVE_RANKS.includes(rank);
+                const displayLabel = currentNicknameMode ? (NICKNAMES[rank] || name) : name;
+
+                const item = document.createElement('div');
+                item.className = `roster-item ${isActive ? 'active' : ''}`;
+                
+                if (isActive) {
+                    item.onclick = () => showDetail(rank);
+                }
+
+                item.innerHTML = `
+                    <span class="pl-display rank-num">${rank}位</span>
+                    <span class="char-name-label">${displayLabel}</span>
+                    ${!isActive ? '<span class="lock-status">🔒 추후 공개 예정</span>' : ''}
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        // 상세조회 주입
+        function showDetail(rank) {
+            const p = PROFILES[rank];
+            if (!p) return;
+
+            document.getElementById('detail-header-title').innerText = `RANK ${rank} DOSSIER`;
+            const target = document.getElementById('detail-target');
+
+            let basicsHtml = p.basics.map(([k, v]) => `<p class="info-p"><b>${k}</b>${v}</p>`).join('');
+            let appearanceHtml = p.appearance.map(([k, v]) => `<p class="info-p"><b>${k}</b> — ${v}</p>`).join('');
+            let personalityHtml = p.personality.map(([k, v]) => `
+                <div class="personality-box">
+                    <div class="personality-title">${k}</div>
+                    <p class="personality-p">${v}</p>
+                </div>
+            `).join('');
+            
+            let likesHtml = p.likes.map(t => `<span class="pl-tag">${t}</span>`).join('');
+            let dislikesHtml = p.dislikes.map(t => `<span class="pl-tag">${t}</span>`).join('');
+            let dialoguesHtml = p.dialogues.map(([k, v]) => `
+                <div class="dialogue-card">
+                    <div class="dialogue-kind">${k}</div>
+                    "${v}"
+                </div>
+            `).join('');
+
+            target.innerHTML = `
+                <div class="detail-profile">
+                    <img src="${IMG[rank]}" alt="${p.name}" class="detail-img">
+                    <div><span class="rank-badge">RANK ${rank} · 72 DEMONS</span></div>
+                    <h2 class="pl-display" style="font-size: 28px; color: #f3e7c9; letter-spacing: 2px; margin: 10px 0 4px;">${p.name}</h2>
+                    <p class="detail-title">${p.title}</p>
+                </div>
+
+                <div class="detail-quote">${p.quote}</div>
+
+                <div class="section">
+                    <div class="pl-display section-title">BASICS</div>
+                    ${basicsHtml}
+                </div>
+
+                <div class="section">
+                    <div class="pl-display section-title">APPEARANCE</div>
+                    ${appearanceHtml}
+                </div>
+
+                <div class="section">
+                    <div class="pl-display section-title">PERSONALITY</div>
+                    ${personalityHtml}
+                    <div class="tag-box likes" style="margin-top: 14px;">
+                        <div class="tag-box-title">♥ LIKES</div>
+                        <div class="tags-wrapper">${likesHtml}</div>
+                    </div>
+                    <div class="tag-box dislikes">
+                        <div class="tag-box-title">✕ DISLIKES</div>
+                        <div class="tags-wrapper">${dislikesHtml}</div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="pl-display section-title">DIALOGUE</div>
+                    ${dialoguesHtml}
+                </div>
+
+                <div class="section">
+                    <div class="pl-display section-title">TRIVIA</div>
+                    <p class="personality-p">${p.trivia}</p>
+                </div>
+
+                <p style="text-align: center; font-size: 11px; color: #6a5f50; padding: 10px 0 0; margin: 0;">
+                    ※ 마성적 표현·청불 묘사가 포함된 캐릭터입니다. 전체 본문은 다운로드 카드에서 확인하세요.
+                </p>
+            `;
+
+            changeView('detail');
+        }
+
+        // 초기 실행
+        renderRoster();
+    </script>
 </body>
 </html>
