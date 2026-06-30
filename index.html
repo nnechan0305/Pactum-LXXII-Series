@@ -61,7 +61,6 @@
         }
     </style>
 
-    <!-- 1위 바알 전용 스타일 서식 -->
     <style>
         .bp-wrap { background:#0c0a0d; color:#e8e2d8; font-family:'Georgia','Noto Serif KR',serif; max-width:640px; margin:0 auto; padding:0; line-height:1.7; border:1px solid #3a2a1f; overflow:hidden; }
         .bp-wrap * { box-sizing:border-box; max-width:100%; }
@@ -104,7 +103,6 @@
         .bp-say { color:#f0d9a0; }
     </style>
 
-    <!-- 2위 아가레스 전용 스타일 서식 -->
     <style>
         .ag-wrap { background:#0a0b0a; color:#e4e4e0; font-family:'Georgia','Noto Serif KR',serif; max-width:640px; margin:0 auto; padding:0; line-height:1.7; border:1px solid #2a2a2a; overflow:hidden; }
         .ag-wrap * { box-sizing:border-box; max-width:100%; }
@@ -147,7 +145,6 @@
         .ag-say { color:#d8e8b8; }
     </style>
     
-    <!-- 3위 바사고 전용 스타일 서식 (하늘색 피드백 반영 완료) -->
     <style>
         .vs-wrap { background:#090b0e; color:#e2e7ec; font-family:'Georgia','Noto Serif KR',serif; max-width:640px; margin:0 auto; padding:0; line-height:1.7; border:1px solid #1f2630; overflow:hidden; }
         .vs-wrap * { box-sizing:border-box; max-width:100%; }
@@ -193,7 +190,6 @@
 </head>
 <body>
 
-    <!-- 1. 홈 화면 -->
     <section id="view-home" class="view-section active">
         <svg width="104" height="104" viewBox="0 0 100 100" style="display: block;">
             <circle cx="50" cy="50" r="46" fill="none" stroke="#9a7a2e" stroke-width="0.6" />
@@ -208,7 +204,6 @@
         <button class="enter-btn" onclick="changeView('list')">전체 명단 보기 ▾</button>
     </section>
 
-    <!-- 2. 리스트 화면 -->
     <section id="view-list" class="view-section">
         <div class="pl-header">
             <button class="back-btn" onclick="changeView('home')">◀</button>
@@ -221,20 +216,16 @@
             </div>
         </div>
         <div id="roster-list-target" class="list-container">
-            <!-- 명단 리스트 출력 영역 -->
-        </div>
+            </div>
     </section>
 
-    <!-- 3. 상세 화면 -->
     <section id="view-detail" class="view-section">
         <div class="pl-header" style="border-bottom: none; padding-bottom: 5px;">
             <button class="back-btn" onclick="changeView('list')">◀ 목록으로 돌아가기</button>
         </div>
         
-        <!-- 원본 글꾸 컴포넌트 주입 공간 -->
         <div id="detail-target"></div>
         
-        <!-- 캐릭터별 가변 다운로드 버튼 -->
         <div style="height: 60px;"></div>
         <a id="download-link" href="#" target="_blank" rel="noopener noreferrer" class="download-footer">
             📥 봇카드 및 에셋 다운로드
@@ -517,7 +508,7 @@
       <p class="ag-p">그가 침대에서 일어나 186cm의 큰 체구로 흐느적거리듯 다가온다. 신발은 벗었어도 그 특유의 헤비한 압박감은 발밑에서부터 소름 끼치게 전해져 온다. 그가 {{user}}의 목걸이를 손가락으로 툭 건드리며, 나른하면서도 차가운 눈빛으로 얼굴을 훑는다.</p>
       <p class="ag-p ag-say">"지각한 건 그렇다 치고, 얼굴 꼴이 왜 그 모양이냐? 또 밖에서 대가리 머릿수만 믿고 나대는 피라미 새끼들한테 말싸움으로 처참하게 털리고 왔지, 너?"</p>
       <p class="ag-p">아가레스는 어처구니없다는 듯 제 목에 걸린 실버 체인을 거칠게 만지작거린다. 그의 인내심이 바닥났다는 신호다. 그가 {{user}}의 턱을 아프지 않게 쥐어 잡고 제 쪽으로 강제로 당기더니, 귓가에 대고 낮고 매혹적인 목소리로 가사를 한 줄씩 때려 박기 시작한다.</p>
-      <p class="ag-p ag-say">"에휴, 내 집주인이 밖에서 그렇게 좆밥같이 당하고 다니는 꼴은 쪽팔려서 못 보지. 자, 마이크 잡아. 내가 방금 마계 저주 섞어서 비트 위에 찰지게 박히는 디스랩 벌스 하나 짜놨거든?"</p>
+      <p class="ag-p ag-say">"에휴, 내 집주인이 밖에서 그렇게 좆밥같이 당하고 다니는 꼴은 쪽팔려서 못 보지. 자, 마이크 잡아. 내가 방금 마계 저주 섞어서 비트 위에 찰지게 박히는 디스랩 벌스 하나짜놨거든?"</p>
       <p class="ag-p">그가 스피커 볼륨을 다시 키우며 붉은 입술을 매끄럽게 움직인다.</p>
       <p class="ag-p ag-say">"딕션 흐리지 말고, 내가 가르쳐주는 대로 그 새끼 면상에 그대로 꽂아버릴 상말(욕설) 똑바로 카피해봐. 턱 당기고, 플로우 타면서 뱉어. 도망칠 생각 마라. 완벽하게 성공할 때까지 오늘 밤새도록 귓가에 딕션 트레이닝 꽂아줄 테니까."</p>
     </div>
@@ -549,7 +540,7 @@
   <div class="vs-section">
     <div class="vs-h">APPEARANCE & AURA</div>
     <p class="vs-p"><b style="color:#8b9bb4;">체격</b> — 181cm, 군더더기 없이 마른 체형. 골격이 도드라지고 체온이 평균보다 눈에 띄게 낮아, 피부에 닿으면 서늘하고 매끄러운 감촉이 느껴진다.</p>
-    <p class="vs-p"><b style="color:#8b9bb4;">외형</b> — 가느다란 골격과 섬세한 이목구비. 만성적인 수면 부족과 감각 피로로 미간에 옅은 주름이 항상 남아 있다. 눈은 늘 굳게 감겨 있어 눈동자 색조차 알 수 없으며, 그 점이 다가가기 힘든 신비로움을 더한다.</p>
+    <p class="vs-p"><b style="color:#8b9bb4;">외형</b> — 가느다란 골격과 섬세한 이목구비. 만성적인 수면 부족하고 감각 피로로 미간에 옅은 주름이 항상 남아 있다. 눈은 늘 굳게 감겨 있어 눈동자 색조차 알 수 없으며, 그 점이 다가가기 힘든 신비로움을 더한다.</p>
     <p class="vs-p"><b style="color:#8b9bb4;">복장</b> — 시선을 끌지 않기 위해 클래식한 탐정 스타일을 고수한다. 갈색 베레모, 부드러운 흰 셔츠에 붉은 넥타이, 회색 조끼, 무릎까지 오는 갈색 코트, 얇은 갈색 가죽 장갑, 단정한 검은 바지. 모든 옷가지는 피부에 마찰이 적은 소재로만 골랐다.</p>
     <p class="vs-p"><b style="color:#8b9bb4;">분위기</b> — 오래된 종이와 먼지, 차가운 공기의 냄새가 배어 있는 정적인 분위기. 빛과 소음, 갑작스러운 움직임을 본능적으로 밀어내는 극도로 예민한 기운을 풍기며, 주변 공간을 묘하게 멈춰 있게 만든다.</p>
   </div>
@@ -651,6 +642,11 @@
             document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
             document.getElementById(`view-${viewId}`).classList.add('active');
             window.scrollTo(0, 0);
+
+            // 홈이나 리스트 화면으로 복귀 시 주소창 파라미터 찌꺼기 제거
+            if (viewId === 'home' || viewId === 'list') {
+                window.history.pushState({}, "", window.location.pathname);
+            }
         }
 
         function setNicknameMode(mode) {
@@ -703,11 +699,25 @@
                 downloadBtn.style.display = 'none'; 
             }
 
+            // [주소창 변경] 진입하는 캐릭터 번호(?char=번호)를 주소 뒤에 강제로 붙여주기
+            window.history.pushState({}, "", `?char=${rank}`);
+
             changeView('detail');
         }
 
-        // 초기 구동
-        renderRoster();
+        // 초기 구동 및 공유 링크 전용 로직
+        window.addEventListener('DOMContentLoaded', () => {
+            renderRoster();
+
+            // 주소창 파라미터(?char=...) 추출
+            const urlParams = new URLSearchParams(window.location.search);
+            const charRank = urlParams.get('char');
+
+            // 공유 링크를 타고 온 경우 고유 번호 매칭해서 해당 캐릭터 바로 오픈
+            if (charRank && ACTIVE_RANKS.includes(Number(charRank))) {
+                showDetail(Number(charRank));
+            }
+        });
     </script>
 </body>
 </html>
