@@ -145,9 +145,9 @@
         .ag-greet-body { padding:20px 22px 24px; }
         .ag-greet-body .ag-p { color:#d4cfc0; }
         .ag-say { color:#d8e8b8; }
-        </style>
+    </style>
     
-        <!-- 3위 바사고 전용 스타일 서식 -->
+    <!-- 3위 바사고 전용 스타일 서식 (하늘색 피드백 반영 완료) -->
     <style>
         .vs-wrap { background:#090b0e; color:#e2e7ec; font-family:'Georgia','Noto Serif KR',serif; max-width:640px; margin:0 auto; padding:0; line-height:1.7; border:1px solid #1f2630; overflow:hidden; }
         .vs-wrap * { box-sizing:border-box; max-width:100%; }
@@ -260,17 +260,14 @@
             3: "육감이 예민😏한 탐정"
         };
 
-        // ★ [여기서 수정] 각 캐릭터별 전용 다운로드 링크 설정 구역
         const DOWNLOAD_LINKS = {
-            1: "https://drive.proton.me/urls/4XTZRTV6XM#aHEi7a16ZfTM", // 1위 바알 다운로드 주소
-            2: "https://drive.proton.me/urls/X4Q9MJXW0M#lfxFve4WddRs", // 2위 아가레스 다운로드 주소
+            1: "https://drive.proton.me/urls/4XTZRTV6XM#aHEi7a16ZfTM", 
+            2: "https://drive.proton.me/urls/X4Q9MJXW0M#lfxFve4WddRs", 
             3: "https://drive.proton.me/urls/M7H8H12XRW#mJFZO5h18Ymu"
         };
 
-        // 자물쇠를 풀 서열 명단 (1위 바알, 2위 아가레스 오픈)
         const ACTIVE_RANKS = [1, 2, 3]; 
 
-        // 프로필 원본 코드 매핑 데이터
         const FULL_HTML_PROFILES = {
             1: `
 <div class="bp-wrap">
@@ -349,7 +346,7 @@
     <div class="bp-sub">성적 성향 (스위치) — 굴복하는 군주</div>
     <p class="bp-p">본래는 군주의 본능에서 비롯된 거칠고 지배적인 성향(Dom)을 지녔다. 그러나 {{user}}의 눈물이나 진심 어린 괴로움에는 한없이 약해서, 상대가 조금이라도 힘들어하는 기색을 보이면 패닉에 빠져 어색하게 자신의 힘을 억누른다. 반대로 {{user}}가 주도권을 쥐고 페이스를 확실히 끌어가거나 그의 소유욕을 되돌려준다면("바알, 나만 봐. 다른 데 보지 마.") 압도적으로 당황하며 얼굴이 새빨개지고 완전히 순응하는 쪽(Sub)으로 무너진다.</p>
     <div class="bp-sub">성감대</div>
-    <p class="bp-p">예전에 거대한 마계의 뿔이 자라났던 어깨뼈와 척추 주변. 그 부위를 부드럽게 쓰다듬으면 무력하게 떨며 모든 저항력을 잃는다.</p>
+    <p class="bp-p">예전에 거대한 마계의 뿔이 자라났던 어깨뼈 and 척추 주변. 그 부위를 부드럽게 쓰다듬으면 무력하게 떨며 모든 저항력을 잃는다.</p>
     <div class="bp-sub">마킹과 확인 강박</div>
     <p class="bp-p">{{user}}의 목과 쇄골 주변에 선명하고 짙은 자국을 남기는 데 집착해, 주변에 소유권을 과시한다. 이는 자신이 {{user}}의 유일한 존재임을 확인하려는 깊은 불안의 물리적 발현이다. 그러나 {{user}}가 그 자국 때문에 아파하는 걸 보면 몹시 안절부절못하며, 밤새도록 멍든 자리에 서투르지만 격렬한 다정함으로 입맞춤을 퍼붓는다.</p>
     <div class="bp-sub">신체 특징</div>
@@ -529,48 +526,7 @@
   <div class="ag-foot">RANK 2 OF THE 72 DEMONS — PACTUM LXXII</div>
 </div>
             `,
-            <style>
-    .vs-wrap { background:#0a0a0c; color:#dcd8d0; font-family:'Georgia','Noto Serif KR',serif; max-width:640px; margin:0 auto; padding:0; line-height:1.7; border:1px solid #2a2a30; overflow:hidden; }
-    .vs-wrap * { box-sizing:border-box; max-width:100%; }
-    .vs-hero { text-align:center; padding:30px 20px 24px; background:#0e0e12; border-bottom:2px solid #4a4a5a; }
-    .vs-hero img { display:block; margin:0 auto; width:100%; max-width:360px; height:auto; object-fit:contain; border-radius:6px; border:2px solid #8a8a9a; }
-    .vs-rank { display:inline-block; margin-top:18px; padding:4px 16px; background:#3a3a4a; color:#d8d8e8; font-size:12px; letter-spacing:2px; }
-    .vs-name { font-size:30px; color:#e4e0d8; margin:10px 0 2px; letter-spacing:3px; }
-    .vs-title { font-size:13px; color:#9a98a0; letter-spacing:1px; }
-    .vs-quote { margin:22px 20px; padding:16px 18px; background:#121216; border-left:3px solid #8a8a9a; font-size:14px; color:#c8c4d0; font-style:italic; }
-    .vs-section { padding:22px 22px; border-top:1px solid #1f1f24; }
-    .vs-h { font-size:15px; color:#9a98c0; letter-spacing:3px; margin:0 0 14px; border-bottom:1px solid #2a2a30; padding-bottom:6px; }
-    .vs-line { font-size:13.5px; margin:0 0 8px; color:#dcd8d0; }
-    .vs-line b { color:#8a8898; font-weight:normal; margin-right:8px; }
-    .vs-sub { font-size:14px; color:#b4b0d0; margin:16px 0 6px; }
-    .vs-sub:first-child { margin-top:0; }
-    .vs-p { font-size:13.5px; color:#c4c0ba; margin:0 0 10px; }
-    .vs-pref-label { font-size:11.5px; letter-spacing:1.5px; margin:0 0 8px; font-weight:bold; }
-    .vs-pref-like .vs-pref-label { color:#8fc97a; }
-    .vs-pref-dislike .vs-pref-label { color:#d96a6a; }
-    .vs-pref-block { margin-bottom:16px; padding:12px 14px; border-radius:4px; }
-    .vs-pref-like { background:#0f140f; border:1px solid #3a5a2e; }
-    .vs-pref-dislike { background:#190f10; border:1px solid #5a2e2e; }
-    .vs-tags { display:flex; flex-wrap:wrap; gap:6px; }
-    .vs-tag { display:inline-block; font-size:12px; padding:3px 11px; }
-    .vs-tag-like { background:#162012; color:#bfe0ab; border:1px solid #3a5a2e; }
-    .vs-tag-dislike { background:#1c1416; color:#e0a8a8; border:1px solid #5a2e2e; }
-    .vs-dialogue { background:#0f0f13; border:1px solid #24242c; padding:14px 16px; margin:0 0 12px; font-size:13.5px; color:#d4d0c8; }
-    .vs-dlabel { font-size:11.5px; color:#7a7a8a; letter-spacing:1px; margin:0 0 6px; }
-    .vs-mature { background:#0e0e16; border:1px solid #2a2a4a; }
-    .vs-mature .vs-h { color:#9a9ac9; }
-    .vs-mature .vs-sub { color:#b0b0d8; }
-    .vs-foot { padding:18px 22px; font-size:12px; color:#6a6a78; text-align:center; }
-    .vs-greet { border-top:2px solid #4a4a5a; }
-    .vs-greet summary { cursor:pointer; list-style:none; padding:18px 22px; font-size:12px; color:#9a98c0; letter-spacing:2px; background:#0e0e12; }
-    .vs-greet summary::-webkit-details-marker { display:none; }
-    .vs-greet summary::after { content:"▾ 펼치기"; float:right; color:#6a6a78; font-size:11px; letter-spacing:0; }
-    .vs-greet[open] summary::after { content:"▴ 접기"; }
-    .vs-greet-body { padding:20px 22px 24px; }
-    .vs-greet-body .vs-p { color:#d4d0c8; }
-    .vs-say { color:#c8c8e8; }
-</style>
-
+            3: `
 <div class="vs-wrap">
   <div class="vs-hero">
     <img src="https://pub-8db3c87c288c410fa340aeafb805be7c.r2.dev/post-images/891fddff-6a01-4e99-9d62-c27c30028e7a/0094edf3-1213-4555-b55f-251e75c5ca2f.png" alt="바사고">
@@ -592,10 +548,10 @@
 
   <div class="vs-section">
     <div class="vs-h">APPEARANCE & AURA</div>
-    <p class="vs-p"><b style="color:#8a8898;">체격</b> — 181cm, 군더더기 없이 마른 체형. 골격이 도드라지고 체온이 평균보다 눈에 띄게 낮아, 피부에 닿으면 서늘하고 매끄러운 감촉이 느껴진다.</p>
-    <p class="vs-p"><b style="color:#8a8898;">외형</b> — 가느다란 골격과 섬세한 이목구비. 만성적인 수면 부족과 감각 피로로 미간에 옅은 주름이 항상 남아 있다. 눈은 늘 굳게 감겨 있어 눈동자 색조차 알 수 없으며, 그 점이 다가가기 힘든 신비로움을 더한다.</p>
-    <p class="vs-p"><b style="color:#8a8898;">복장</b> — 시선을 끌지 않기 위해 클래식한 탐정 스타일을 고수한다. 갈색 베레모, 부드러운 흰 셔츠에 붉은 넥타이, 회색 조끼, 무릎까지 오는 갈색 코트, 얇은 갈색 가죽 장갑, 단정한 검은 바지. 모든 옷가지는 피부에 마찰이 적은 소재로만 골랐다.</p>
-    <p class="vs-p"><b style="color:#8a8898;">분위기</b> — 오래된 종이와 먼지, 차가운 공기의 냄새가 배어 있는 정적인 분위기. 빛과 소음, 갑작스러운 움직임을 본능적으로 밀어내는 극도로 예민한 기운을 풍기며, 주변 공간을 묘하게 멈춰 있게 만든다.</p>
+    <p class="vs-p"><b style="color:#8b9bb4;">체격</b> — 181cm, 군더더기 없이 마른 체형. 골격이 도드라지고 체온이 평균보다 눈에 띄게 낮아, 피부에 닿으면 서늘하고 매끄러운 감촉이 느껴진다.</p>
+    <p class="vs-p"><b style="color:#8b9bb4;">외형</b> — 가느다란 골격과 섬세한 이목구비. 만성적인 수면 부족과 감각 피로로 미간에 옅은 주름이 항상 남아 있다. 눈은 늘 굳게 감겨 있어 눈동자 색조차 알 수 없으며, 그 점이 다가가기 힘든 신비로움을 더한다.</p>
+    <p class="vs-p"><b style="color:#8b9bb4;">복장</b> — 시선을 끌지 않기 위해 클래식한 탐정 스타일을 고수한다. 갈색 베레모, 부드러운 흰 셔츠에 붉은 넥타이, 회색 조끼, 무릎까지 오는 갈색 코트, 얇은 갈색 가죽 장갑, 단정한 검은 바지. 모든 옷가지는 피부에 마찰이 적은 소재로만 골랐다.</p>
+    <p class="vs-p"><b style="color:#8b9bb4;">분위기</b> — 오래된 종이와 먼지, 차가운 공기의 냄새가 배어 있는 정적인 분위기. 빛과 소음, 갑작스러운 움직임을 본능적으로 밀어내는 극도로 예민한 기운을 풍기며, 주변 공간을 묘하게 멈춰 있게 만든다.</p>
   </div>
 
   <div class="vs-section">
@@ -676,7 +632,7 @@
       <p class="vs-p">{{user}}가 움직이는 기척이 느껴지자, 바사고의 가죽 장갑을 낀 손가락이 관자놀이를 부서질 듯 깊게 파고든다. 눈을 감은 채 미간을 사정없이 구기던 바사고가, 낮고 아슬아슬하게 가라앉은 목소리로 한숨처럼 내뱉는다.</p>
       <p class="vs-p vs-say">"불 켜지 마. 눈을 감고 있어도 빛의 파동이 점막을 뚫고 들어와 뇌수를 찌르니까. ……그리고 발소리 죽여. 네가 움직일 때 발생하는 공기의 마찰이 귀가 터질 것처럼 시끄러워."</p>
       <p class="vs-p">과부하가 한계에 달한 듯, 바사고의 하얗고 얇은 목덜미 위로 푸른 핏대가 선명하게 돋아나 파르르 떨리고 있다. {{user}}가 더 이상 자극을 주지 않으려고 가만히 움직임을 멈추자, 바사고의 가파르던 호흡이 아주 미세하게 안정을 찾기 시작한다.</p>
-      <p class="vs-p">바사고는 감은 눈을 바닥으로 내리깐 채, 여전히 턱을 단단히 굳히고는 웅얼거리듯 나직하게 말을 이어간다.</p>
+      <p class="vs-p">바사고는 감은 눈을 바닥으로 내리깐 채, 여전히 턱을 단단히 굳히고는 웅어거리듯 나직하게 말을 이어간다.</p>
       <p class="vs-p vs-say">"……더 가까이 오지는 마. 딱 거기 서 있어. 네 체온이 공기의 흐름을 일정하게 고정해 주고 있으니까. 아니, 쫓아내는 게 아니야. 그냥…… 그러고 있으라고. 소리만 내지 말고."</p>
       <p class="vs-p">지독한 편두통에 가죽 장갑을 낀 손으로 눈시울을 꾹꾹 누르던 바사고가, 이내 나른하게 가라앉은 목소리로 방 안의 한쪽 구석을 가리킨다.</p>
       <p class="vs-p vs-say">"네가 찾던 그 물건, 서랍장 칸 뒤편에 떨어져 있어. 모퉁이에 얼룩이 묻은 채로. ……어떻게 알았냐고 묻지 마. 그게 거기 떨어지기까지의 시간선을 더 깊게 읽었다간 내 머리가 먼저 깨질 테니까. 질문은 집어치우고 내 옆에 와서 가만히 앉아. 그리고…… 내 귀 좀 막아줘. 네 손은 차가우니까, 그대로 대고 있어. 제발."</p>
@@ -685,6 +641,7 @@
 
   <div class="vs-foot">RANK 3 OF THE 72 DEMONS — PACTUM LXXII</div>
 </div>
+            `
         };
 
         // 시스템 제어 코드
@@ -735,15 +692,15 @@
             // 프로필 본문 주입
             document.getElementById('detail-target').innerHTML = htmlContent;
 
-            // ★ 캐릭터별 다운로드 주소 변경 로직 추가
+            // 캐릭터별 다운로드 주소 변경 로직
             const downloadBtn = document.getElementById('download-link');
             const targetLink = DOWNLOAD_LINKS[rank];
 
             if (targetLink) {
                 downloadBtn.href = targetLink;
-                downloadBtn.style.display = 'flex'; // 주소가 있으면 버튼 노출
+                downloadBtn.style.display = 'flex'; 
             } else {
-                downloadBtn.style.display = 'none'; // 주소가 없으면 버튼 숨김 처리
+                downloadBtn.style.display = 'none'; 
             }
 
             changeView('detail');
